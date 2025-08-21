@@ -40,32 +40,11 @@
         border-radius: 20px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         overflow: hidden;
-        border: 6px solid var(--blue);
+
         position: relative;
       }
       /* Grieks key-border */
-      .menu-wrap::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        padding: 10px;
-        border-radius: 14px;
-        pointer-events: none;
-        background: repeating-linear-gradient(
-            90deg,
-            var(--blue) 0 8px,
-            transparent 8px 16px
-          ),
-          repeating-linear-gradient(
-            0deg,
-            var(--blue) 0 8px,
-            transparent 8px 16px
-          );
-        -webkit-mask: linear-gradient(#000 0 0) content-box,
-          linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-      }
+
       header {
         padding: 36px 28px 18px;
         background: linear-gradient(
@@ -78,9 +57,7 @@
         position: relative;
         overflow: hidden;
       }
-      header .crest {
-        background: radial-gradient(circle at 50% 0%, white, transparent 60%);
-      }
+
       .brand {
         display: flex;
         align-items: center;
@@ -345,7 +322,7 @@
               <p class="desc">
                 Traditioneel Grieks gerecht met kruiden en tomatensaus.
               </p>
-              <div class="price">€16,50</div>
+              <div class="price">€16,5 0</div>
             </article>
 
             <article class="card">
