@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grieks Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blue: #0d4ea6; /* Egeïsch blauw */
+        --blue-dark: #0a3e85;
+        --gold: #c9a227;
+        --ink: #1f2937;
+        --paper: #ffffff;
+        --cloud: #f3f7fb;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--ink);
+        background: var(--cloud);
+        line-height: 1.6;
+      }
+      .menu-wrap {
+        max-width: 900px;
+        margin: 40px auto;
+        background: var(--paper);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        border: 6px solid var(--blue);
+        position: relative;
+      }
+      /* Grieks key-border */
+      .menu-wrap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        padding: 10px;
+        border-radius: 14px;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+            90deg,
+            var(--blue) 0 8px,
+            transparent 8px 16px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            var(--blue) 0 8px,
+            transparent 8px 16px
+          );
+        -webkit-mask: linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+      header {
+        padding: 36px 28px 18px;
+        background: linear-gradient(
+          180deg,
+          var(--blue) 0%,
+          var(--blue-dark) 100%
+        );
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      header .crest {
+        background: radial-gradient(circle at 50% 0%, white, transparent 60%);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+      .brand img {
+        height: 200px;
+        width: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
+      }
+      .brand .title {
+        font-family: Marcellus, serif;
+        letter-spacing: 0.06em;
+        font-size: clamp(36px, 3vw, 38px);
+        text-transform: uppercase;
+      }
+
+      h2.section-title {
+        font-family: Marcellus, serif;
+        color: var(--blue-dark);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 18px;
+        border-left: 6px solid var(--gold);
+        padding-left: 12px;
+        margin: 28px 0 8px;
+      }
+      .subtitle {
+        opacity: 0.9;
+        margin: 0 0 18px;
+        font-size: 14px;
+      }
+      main {
+        padding: 24px 28px 36px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+      @media (min-width: 680px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #e5eef8;
+        border-radius: 16px;
+        padding: 16px 16px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+      }
+      .item-name {
+        font-family: Marcellus, serif;
+        font-size: 18px;
+        letter-spacing: 0.02em;
+        color: var(--blue-dark);
+        margin: 0 0 6px;
+      }
+      .desc {
+        margin: 0;
+        font-size: 14px;
+        color: #374151;
+        flex-grow: 1;
+      }
+      .price {
+        margin-top: 8px;
+        font-weight: 600;
+        color: var(--gold);
+      }
+
+      .dish-photo {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 10px;
+      }
+
+      footer {
+        padding: 18px 28px 32px;
+        text-align: center;
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      /* Print */
+      @media print {
+        body {
+          background: white;
+        }
+        .menu-wrap {
+          box-shadow: none;
+          border-width: 4px;
+        }
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .card {
+          break-inside: avoid;
+        }
+        header {
+          background: white;
+          color: var(--blue-dark);
+          border-bottom: 2px solid var(--blue);
+        }
+        header .crest {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-wrap">
+      <header>
+        <div aria-hidden="true" class="crest"></div>
+        <div class="brand">
+          <img src="./logo.png" alt="Logo Maria's Kitchen" />
+          <div class="title">Maria's Kitchen</div>
+
+          <div class="title">Telefoon nummer: 0616087014</div>
+        </div>
+      </header>
+
+      <main>
+        <section>
+          <h2 class="section-title">Voorgerechten</h2>
+          <p class="subtitle">Altijd beschikbaar</p>
+          <div class="grid">
+            <article class="card">
+              <img
+                src="./voorgerecht.jpg"
+                alt="Voorgerecht"
+                class="dish-photo"
+              />
+              <h3 class="item-name">Tzatziki</h3>
+              <p class="desc">
+                Romige yoghurt met komkommer, knoflook en dille.
+              </p>
+              <div class="price">€4,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Auberginesalade</h3>
+              <p class="desc">
+                Gerookte/gegrilde aubergine, olijfolie en citroen.
+              </p>
+              <div class="price">€5,00</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Tirosalata (Feta mousse)</h3>
+              <p class="desc">
+                Luchtige mousse van Griekse feta, licht pittig.
+              </p>
+              <div class="price">€5,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Griekse feta</h3>
+              <p class="desc">Met extra vergine olijfolie en oregano.</p>
+              <div class="price">€5,50</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Salades</h2>
+          <p class="subtitle">Altijd beschikbaar</p>
+          <div class="grid">
+            <article class="card">
+              <img src="./sla.jpg" alt="Griekse salade" class="dish-photo" />
+              <h3 class="item-name">Choriatiki – Griekse salade</h3>
+              <p class="desc">
+                Tomaat, komkommer, ui, groene paprika, Griekse feta, olijven en
+                olijfolie.
+              </p>
+              <div class="price">€7,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Gestoomde groenten</h3>
+              <p class="desc">
+                Broccoli, bloemkool, babycourgette, rode biet en vlita, in
+                citroensaus.
+              </p>
+              <div class="price">€6,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Lahano salade</h3>
+              <p class="desc">
+                Kool, wortel, selderij, spinazie en huisgemaakte saus.
+              </p>
+              <div class="price">€6,00</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Rucolasalade</h3>
+              <p class="desc">
+                Rucola met rode biet, walnoten en gekookt ei. Huisgemaakte
+                Griekse dressing.
+              </p>
+              <div class="price">€8,00</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Nagerechten</h2>
+          <p class="subtitle">Altijd beschikbaar</p>
+          <div class="grid">
+            <article class="card">
+              <h3 class="item-name">Baklava</h3>
+              <p class="desc">Filodeeg gevuld met noten en honing siroop.</p>
+              <div class="price">€4,50</div>
+            </article>
+
+            <article class="card">
+              <img
+                src="./kokoscake.jpg"
+                alt="Revani kokos cake"
+                class="dish-photo"
+              />
+              <h3 class="item-name">Revani</h3>
+              <p class="desc">Traditionele kokos cake in siroop.</p>
+              <div class="price">€4,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Griekse yoghurt</h3>
+              <p class="desc">
+                Met honing & walnoten of met gedroogde vijgen in siroop.
+              </p>
+              <div class="price">€5,00</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Hoofdgerechten – Vrijdag</h2>
+          <div class="grid">
+            <article class="card">
+              <img
+                src="./tomaat.jpg"
+                alt="Gevulde paprika"
+                class="dish-photo"
+              />
+              <h3 class="item-name">Gevulde paprika met gehakt en rijst</h3>
+              <p class="desc">
+                Traditioneel Grieks gerecht met kruiden en tomatensaus.
+              </p>
+              <div class="price">€16,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Gevulde paprika met rijst (Vegetarisch)</h3>
+              <p class="desc">
+                Rijke vulling van rijst en groenten met mediterrane kruiden.
+              </p>
+              <div class="price">13,50</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Hoofdgerechten – Zaterdag</h2>
+          <div class="grid">
+            <article class="card">
+              <img
+                src="./tiganaki.jpg"
+                alt="Tiganaki kotopoulo"
+                class="dish-photo"
+              />
+              <h3 class="item-name">Tiganaki kotopoulo</h3>
+              <p class="desc">
+                Gebakken stukjes kipfilet met groenten, afgeblust met Metaxa in
+                een heerlijke saus.
+              </p>
+              <div class="price">€16,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Fasolakia ladera (Vegetarisch)</h3>
+              <p class="desc">
+                Verse sperziebonen met aardappel in Griekse tomatensaus.
+              </p>
+              <div class="price">€13,50</div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="section-title">Hoofdgerechten – Zondag</h2>
+          <div class="grid">
+            <article class="card">
+              <img src="./pastitio.jpg" alt="Pastitsio" class="dish-photo" />
+              <h3 class="item-name">Pastitsio</h3>
+              <p class="desc">
+                Ovenschotel van Griekse pasta met gehakt en bechamelsaus.
+              </p>
+              <div class="price">€16,50</div>
+            </article>
+
+            <article class="card">
+              <h3 class="item-name">Pastitsio (Vegetarisch)</h3>
+              <p class="desc">
+                Vegetarische ovenschotel van Griekse pasta met champignons en
+                bechamelsaus.
+              </p>
+              <div class="price">€13,50</div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>
+          Alle gerechten worden bereid met Griekse olijfolie en kruiden.
+          Allergeneninformatie op verzoek beschikbaar.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
